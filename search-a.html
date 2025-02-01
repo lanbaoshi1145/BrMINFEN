@@ -18,7 +18,7 @@
     <center>
       <div>
         作者名<span style="color: red;">*</span>：
-        <input type="text" size="25" name="query" class="text" placeholder="输入作者名进行搜索" id="searchstring" action="/register" />
+        <input type="text" size="25" name="query" class="text" placeholder="输入作者名进行搜索" id="searchstring" />
         <input type="button" style="box-shadow: none;
     background: rgb(var(--swatch-primary-darkest));
     color: rgb(var(--swatch-text-light));cursor: pointer;
@@ -33,7 +33,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0.25rem;
-    min-height: calc(var(--base-font-size) * 0.9333333333 * 1.85);"value="搜索" onClick="goSearch();"/>
+    min-height: calc(var(--base-font-size) * 0.9333333333 * 1.85);" value="搜索" onClick="goSearch();"/>
       </div>
       <br>
       <div>
@@ -46,17 +46,25 @@
       </div>
     </center>
     <script type="text/javascript">
-      /****************** 开始跳转并搜索内容 */
       function sortselect(a) {
         theSortselect = a;
       }
+
       let theSortselect = "created_at desc";
-      let theLocation = "https://brsandbox-mini.wikidot.com/search:author/created_by/";
+
+      let currentUrl = window.location.href;
+      let urlParams = new URLSearchParams(new URL(currentUrl).search);
+      let site = urlParams.get('site');
+
+      if (site && !site.startsWith('http://') && !site.startsWith('https://')) {
+        site = 'https://' + site;
+      }
+
+      let theLocation = site ? `${site}/search:author/created_by/` : "https://brsandbox-mini.wikidot.com/search:author/created_by/";
+
       function goSearch() {
         theLocation += document.getElementById("searchstring").value + "/order/" + theSortselect;
-        window.top.location.href = theLocation;
-        window.parent.location.href = theLocation;
-        window.top.location.replace(theLocation);
+        window.location.href = theLocation;
       }
     </script>
   </body>
