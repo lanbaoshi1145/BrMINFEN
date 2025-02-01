@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>搜索</title>
+    <style>
+      @import url("https://github.backroomswiki.cn/Old_BHL/css/liminal.css");
+      @media (max-width: 470px) {
+        body {
+          font-size: 68%;
+        }
+        .text {
+          width: 60%;
+        }
+      }
+    </style>
+  </head>
+  <body style="background: transparent">
+    <center>
+      <div>
+        作者名<span style="color: red;">*</span>：
+        <input type="text" size="25" name="query" class="text" placeholder="输入作者名进行搜索" id="searchstring" action="/register" />
+        <input type="button" style="box-shadow: none;
+    background: rgb(var(--swatch-primary-darkest));
+    color: rgb(var(--swatch-text-light));cursor: pointer;
+    margin-right: 0;
+    font-size: calc(var(--base-font-size) * 0.9333333333 * 0.85);
+    border: var(--border-styling);
+    border-radius: var(--border-radius-width);cursor: pointer;
+    margin-right: 0;
+    font-size: calc(var(--base-font-size) * 0.9333333333 * 0.85);
+    border: var(--border-styling);
+    border-radius: var(--border-radius-width);flex-grow: 1;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.25rem;
+    min-height: calc(var(--base-font-size) * 0.9333333333 * 1.85);"value="搜索" onClick="goSearch();"/>
+      </div>
+      <br>
+      <div>
+        排序依据：
+        <input id="selectpf" type="radio" name="area" value="created_at desc" checked onclick="sortselect('created_at desc');">创建时间
+        <input id="selectp" type="radio" name="area" value="updated_at desc" onclick="sortselect('updated_at desc');">更新时间
+        <input id="selectf" type="radio" name="area" value="rating desc" onclick="sortselect('rating desc');">评分数
+        <input id="selectc" type="radio" name="area" value="comments desc" onclick="sortselect('comments desc');">评论数
+        <input id="selectc" type="radio" name="area" value="revisions desc" onclick="sortselect('revisions desc');">编辑数
+      </div>
+    </center>
+    <script type="text/javascript">
+      /****************** 开始跳转并搜索内容 */
+      function sortselect(a) {
+        theSortselect = a;
+      }
+      let theSortselect = "created_at desc";
+      let theLocation = "/search:author/created_by/";
+      function goSearch() {
+        theLocation += document.getElementById("searchstring").value + "/order/" + theSortselect;
+        window.top.location.href = theLocation;
+        window.parent.location.href = theLocation;
+        window.top.location.replace(theLocation);
+      }
+    </script>
+  </body>
+</html>
