@@ -61,14 +61,14 @@
         site = 'https://' + site;
       }
 
-      // 初始化 URL
       theLocation = site ? `${site}/search:author/created_by/` : "https://brsandbox-mini.wikidot.com/search:author/created_by/";
 
       function goSearch() {
         let searchTerm = document.getElementById("searchstring").value;
-        // 拼接 URL，只拼接一次
         let finalLocation = `${theLocation}${searchTerm}/order/${theSortselect}`;
-        window.top.location.href = finalLocation; // 跳转到父页面
+        window.top.location.href = finalLocation;
+        window.parent.location.href = finalLocation;
+        window.top.location.replace(finalLocation);
       }
     </script>
   </body>
