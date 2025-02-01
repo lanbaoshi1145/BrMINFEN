@@ -51,7 +51,7 @@
         theSortselect = a;
       }
       let theSortselect = "created_at desc";
-      let theLocation = "/search:author/created_by/";
+      let theLocation = "https://brsandbox-mini.wikidot.com/search:author/created_by/";
       function goSearch() {
         theLocation += document.getElementById("searchstring").value + "/order/" + theSortselect;
         window.top.location.href = theLocation;
